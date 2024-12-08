@@ -1,6 +1,3 @@
-from dotenv import load_dotenv
-
-load_dotenv()
 import base64
 import streamlit as st
 import os
@@ -9,8 +6,8 @@ from PIL import Image
 import pdf2image
 import google.generativeai as genai
 
-# Configure the Generative AI API
-genai.configure(api_key=os.getenv("AIzaSyCJl-qUUTf3GcJrVBtmNRDrtgSQXsgWVtU"))
+# Configure the Generative AI API with your provided API key
+genai.configure(api_key="AIzaSyDiKGPo8SeNlAqbb7QqXujtrzIt0o-4Oyo")
 
 def get_gemini_response(input, pdf_content, prompt):
     model = genai.GenerativeModel("gemini-1.5-flash")
@@ -61,7 +58,7 @@ st.markdown(
     <style>
     /* Add background image */
     body {
-        background-image: url('https://source.unsplash.com/1600x900/?coding,technology');
+        background-image: url('https://source.unsplash.com/1600x900/?coding,abstract');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -69,31 +66,52 @@ st.markdown(
     }
     /* Style for the header */
     .centered-header {
-        color: white; /* White color */
+        color: green; /* Green color */
         text-shadow: 3px 3px 6px black;
         font-family: 'Verdana', sans-serif;
         font-size: 36px;
         text-align: center;
         margin-bottom: 20px;
     }
+    .header-underline {
+        width: 50%;
+        margin: 0 auto 20px;
+        border-bottom: 3px solid white;
+    }
     /* Style for buttons */
-    .stButton > button, .stFileUploader label div {
-        background-color: white; /* White default color for buttons */
-        color: black; /* Black text color */
+    .stButton > button {
+        background-color: white; /* White button color */
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
-        text-decoration: none;
         display: inline-block;
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
         border-radius: 8px;
         box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        transition: background-color 0.3s;
     }
-    .stButton > button:hover, .stFileUploader label div:hover {
-        background-color: #32CD32; /* Green color on hover */
+    .stButton > button:hover {
+        background-color: green; /* Green on hover */
+        color: white; /* White text on hover */
+    }
+    /* Style for file uploader button */
+    .stFileUploader label div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        background-color: white;
+        color: black;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+    .stFileUploader label div:hover {
+        background-color: green; /* Green shade on hover */
         color: white; /* White text on hover */
     }
     </style>
@@ -101,8 +119,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Header with centered white text
+# Header with centered text and underline
 st.markdown("<h1 class='centered-header'>ATS TRACKING SYSTEM - BY VIVEK DESHMUKH</h1>", unsafe_allow_html=True)
+st.markdown("<div class='header-underline'></div>", unsafe_allow_html=True)
 
 # Text area and file uploader
 input_text = st.text_area("ADD JOB DESCRIPTION HERE:", key="input")
